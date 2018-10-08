@@ -1,10 +1,11 @@
-# Terraform-2-Tier (Senario 2 of AWS VPC) Optimzed configuration files
+# Optimzed configuration code: Terraform-2-Tier (Senario 2 of AWS VPC) 
 
 
 Build traditional 2 Tier infrastructure in AWS by Terraform, include below resources:
 * 1VPC
 * 1 Public subnet include 1 VM for Web Server and 1 NAT VM associating with VMs in Priviate Subnet
 * 1 Pricate subnet include 1 VM for DB server, associated with the NAT server in the Public subnet
+* Created Jenkins Pipeline as code which can trigger the build by just running the Jenkins Project
 
 
 Detailed Document is available at 
