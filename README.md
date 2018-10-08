@@ -1,10 +1,29 @@
-# Terraform-Nginx-Docker
-Build Docker container instances by Terraform, associate with Nginx load balancing
+# Terraform-2-Tier (Senario 2 of AWS VPC) Optimzed configuration files
+
+
+Build traditional 2 Tier infrastructure in AWS by Terraform, include below resources:
+* 1VPC
+* 1 Public subnet include 1 VM for Web Server and 1 NAT VM associating with VMs in Priviate Subnet
+* 1 Pricate subnet include 1 VM for DB server, associated with the NAT server in the Public subnet
+
+
+Detailed Document is available at 
+
+https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html
 
 
 ## terraform-aws-vpc
-Borrowed code from webpage: https://nickcharlton.net/posts/terraform-aws-vpc.html
-This repository contains a Terraform project that builds Scenario 2: VPC with Public and Private Subnets from the AWS documentation. It's from this blog post describing how it all works and is designed to give a working example which can the basis of something much more complex.
+Use multiple .tf file as below:
+
+* aws.tf define the provider aws with default region and credential
+* backend.tf define backend mode, save state file on S3 bucket with pre-defined name
+* terraform.tfvars define output vars
+* variables.tf define the frequently used variables like CIDR, AMI,etc.
+* vpc.tf code to create VPC with NAT VM
+* public.tf code to create public subnet in the VPC 
+* private.tf code to create priviate subnet in the VPC
+
+Original code is from webpage: https://nickcharlton.net/posts/terraform-aws-vpc.html, I tailered it to Ca region with my own environment settings, fixed the bugs found from the original code. Details are listed at Issue-Log.md
 
 ## Usage
 terraform.tfvars holds variables which should be overriden with valid ones.
@@ -21,8 +40,8 @@ terraform.tfvars holds variables which should be overriden with valid ones.
 
        terraform destroy -var-file terraform.tfvars
        
-Author Copyright (c) 2015 Nick Charlton nick@nickcharlton.net. MIT Licensed.
 
+Note:
 The NAT instance is a special Amazon Linux AMI which handles the routing correctly. It can be found on the AWS Marketplace using the aws command line tool by doing something like this. Like all AMIs, there’s specific images for each region.
 
     aws ec2 describe-images --filter Name="owner-alias",Values="amazon" --filter Name="name",Values="amzn-ami-vpc-nat*"
