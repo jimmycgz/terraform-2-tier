@@ -33,7 +33,7 @@ environment {
         stage('APPLY') {
             steps {
                 sh  """
-                  #  ${TERRAFORM_CMD} apply -lock=false -auto-approve  
+                    ${TERRAFORM_CMD} apply -lock=false -auto-approve  
                                  
                     """
                   }
