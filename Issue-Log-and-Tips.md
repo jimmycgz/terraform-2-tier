@@ -68,12 +68,12 @@ Resolution: Install and run Terraform in another EC2.
 ## * The disk is out of space on Tool Server
   Resolution: the 10G space is running out. It works after deleting some folder and files with below steps:
 ```
-      sudo du -a |sort -n -r |head -n -10
-	  sudo rm -rf foldername
+sudo du -a |sort -n -r |head -n -10
+sudo rm -rf foldername
 ```
 
 ## * Bug1 from the original code: The webserver VM can't access internet
-  Resolution: Opened the missing emgress port 80 in the Security Group for public subnet
+  Resolution: Opened the missing egress port 80 in the Security Group for public subnet
   
 ## * Bug2 from the orininal code: got error message saying ssh key file missing
   Resolution: In terraform.tfvars, found a predefined path as aws_key_path = "~/.ssh/" for ssh key file which should leave empty if you refer to the default key file of your AWS cloud account.
